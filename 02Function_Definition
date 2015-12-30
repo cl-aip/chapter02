@@ -1,0 +1,169 @@
+(defun square (n)
+  "return the square of number 《n》."
+  (* n n))
+ => square
+
+(defun left-rotate (list)
+  "move the first element to the end of the 《list》."
+  (append (rest list) (list (first list))))
+ => left-rotate
+ 
+((lambda (list)
+   (append (rest list) (list (first list))))
+ '(a b c d))
+ => (b c d a)
+
+(atom 'foo)               => t
+(atom '(this is a list))  => nil
+(atom 'pi)                => t
+(atom pi)                 => t
+(atom t)                  => t
+(atom 1234)               => t
+(atom -3.14)              => t
+(atom 1/3)                => t
+
+(listp 'foo)              => nil
+(listp '(this is a list)) => t
+
+(symbolp 'foo)                    => t
+(symbolp '(this is not a symbol)) => nil
+(symbolp 'pi)                     => t
+(symbolp pi)                      => nil
+(symbolp 1234)                    => nil
+
+(numberp 'foo) => nil
+(numberp 5)    => t
+(setq foo 5)   => 5
+(numberp foo)  => t
+(numberp 'pi)  => nil
+(numberp pi)   => t
+(numberp 1234) => t
+
+(atom 'nil)    => t
+(atom '())     => t
+(listp 'nil)   => t
+(listp '())    => t
+
+(null '(this is not empty)) => nil
+(endp '(this is not empty)) => nil
+(null '())                  => t
+(endp '())                  => t
+(null 'this-is-not-a-list)  => nil
+(endp 'this-is-not-a-list)  ; Error
+
+(eq 'foo 'foo)                => t
+(setq bar 'foo bii 'foo)      => foo
+(eq bar bii)                  => t
+(setq foo '(this is a list))  => (this is a list)
+(setq bar foo)                => (this is a list)
+(eq foo bar)                  => t
+(eq foo '(this is a list))    => nil
+(eql foo '(this is a list))   => nil
+(equal foo '(this is a list)) => t
+
+(setq tools '(saw wrench pliers hammer screwdriver))
+ => (saw wrench pliers hammer screwdriver)
+(member 'hammer tools) => (hammer screwdriver)
+(find 'hammer tools)
+
+(not t)                => nil
+(not nil)              => t
+(not 'something)       => nil
+(not (not 'something)) => t
+
+(and t t t)               => t
+(and t t nil)             => nil
+(or nil nil nil)          => nil
+(or nil nil t)            => t
+(setq foo 'baz)           => baz
+foo                       => baz
+(and nil (setq foo 'bar)) => nil
+foo                       => baz
+(and 1 2 'foo)            => foo
+(or t (setq foo 'bar))    => t
+foo                       => baz
+(or nil nil 'foo)         => foo
+
+(setq tools '(saw wrench pliers hammer screwdriver))
+  => (saw wrench pliers hammer screwdriver)
+(if (member 'hammer tools) 'THERE-IS-A-HAMMER 
+  'NO-HAMMER)
+  => THERE-IS-A-HAMMER
+(if (member 'apple tools) 'THERE-IS-AN-APPLE 'NO-APPLE)
+  => NO-APPLE
+
+(setq tools '(saw wrench pliers hammer screwdriver))
+  => (saw wrench pliers hammer screwdriver)
+(when (member 'pliers tools)
+  (setq tools (remove 'pliers tools))
+  (setq tools (cons 'pincers tools)))
+  => (pincers saw wrench hammer screwdriver)
+tools => (pincers saw wrench hammer screwdriver)
+
+(unless (member 'pliers tools)
+  (setq tools (cons 'pliers tools)))
+  => (pliers pincers saw wrench hammer screwdriver)
+tools => (pliers pincers saw wrench hammer screwdriver)
+
+(setq thing 'sphere r 1) => 1
+(cond ((eq thing 'circle) (* pi r r))
+      ((eq thing 'sphere) (* 4 pi r r)))
+ => 12.566370614359172d0
+(setq thing 'circle r 1) => 1
+(cond ((eq thing 'circle) (* pi r r))
+      ((eq thing 'sphere) (* 4 pi r r)))
+ => 3.141592653589793d0
+
+(setq tools '(saw wrench pliers hammer screwdriver))
+  => (saw wrench pliers hammer screwdriver)
+(cond ((member 'hammer tools) 'THERE-IS-A-HAMMER)
+      (t 'NO-HAMMER))
+  => THERE-IS-A-HAMMER
+(cond ((member 'apple tools) 'THERE-IS-AN-APPLE)
+      (t 'NO-APPLE))
+  => NO-APPLE
+
+(setq thing 'sphere r 1)   => 1
+(case thing
+  (circle (* pi r r))
+  (sphere (* 4 pi r r)))
+  => 12.566370614359172d0
+
+(setq foo t) => t
+(case foo
+  ((nil) (format t ";NIL given."))
+  ((t)   (format t ";T given."))
+  (otherwise (format t ";Anything else than NIL and T.")))
+;T given.
+  => nil
+
+(setq weekday 'Sun.)  => Sun.
+(ecase weekday
+  ((Mon. Monday monday)
+     '(he ate through one apple.))
+  ((Tue. Tuesday tuesday)
+     '(he ate through two pears.))
+  ((Wed. Wednesday wednesday)
+     '(he ate through three plums.))
+  ((Thu. Thursday thursday)
+     '(he ate through four strawberries.))
+  ((Fri. Friday friday)
+     '(he ate through five oranges.))
+  ((Sat. Saturday)
+     '(he ate through one piece of chocolate cake\,
+       one ice-cream\, one pickle\, one slice of
+       Swiss cheese\, one slice of salami\, one lollipop\,
+       one piece of cherry pie\, one sausage\,
+       one cupcake\, and one slice of watermelon.))
+  ((Sun. Sunday sunday)
+     '(he has become a beautiful butterfly!)))
+  => (he has become a beautiful butterfly
+
+(setq foo 'a-symbol)  => a-symbol
+(typecase foo
+  (number '(this is a number.))
+  (string '(this is a string.))
+  (symbol '(this is a symbol.))
+  (array '(this is an array.))
+  (otherwise '(anything else.)))
+  => (this is a symbol.)!)
