@@ -64,7 +64,7 @@
 (setq tools '(saw wrench pliers hammer screwdriver))
  => (saw wrench pliers hammer screwdriver)
 (member 'hammer tools) => (hammer screwdriver)
-(find 'hammer tools)
+(find 'hammer tools) => hammer
 
 (not t)                => nil
 (not nil)              => t
@@ -99,7 +99,6 @@ foo                       => baz
   (setq tools (cons 'pincers tools)))
   => (pincers saw wrench hammer screwdriver)
 tools => (pincers saw wrench hammer screwdriver)
-
 (unless (member 'pliers tools)
   (setq tools (cons 'pliers tools)))
   => (pliers pincers saw wrench hammer screwdriver)
